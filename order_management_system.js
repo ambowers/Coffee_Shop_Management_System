@@ -82,29 +82,10 @@ function checkPendingOrders (){
         }});
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// sample usage
+placeOrder('Lina', [{product: 'Iced Mocha', quantity: 2}])
+placeOrder('Dr.Reed',[{product: 'Blueberry Muffin', quantity: 3}]);
+checkPendingOrders()
+completeOrder('Lina');
+checkPendingOrders()
+completeOrder('Dr.Reed') // lol hehe
