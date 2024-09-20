@@ -2,9 +2,9 @@
 
 const inventory = [
     { name: 'Espresso', price: 3, quantity: 10 }, 
-    {name: 'Latte', price: 4, quantity: 5 },
-    { name: 'Cappuccino', price: 4, quantity: 6 }, 
-    { name: 'Mocha', price: 5, quantity: 0 } // made quantity zero to test out of stock mssg 
+    {name: 'Vanilla Latte', price: 4, quantity: 5 },
+    { name: 'Blueberry Muffin', price: 5, quantity: 6 }, 
+    { name: 'Iced Mocha', price: 6, quantity: 8 }  
  ];
 
  // Task 2  create an orders array of order objects
@@ -18,9 +18,9 @@ function placeOrder(customerName, itemsOrdered){
     const itemsInStock = itemsOrdered.reduce((availibility, item) => {
         if (!availibility) return false;
 
-        let product = inventory.find(order => order.name === item.product);
+        let product = inventory.find(product => product.name === item.product); //locating the name from the inventory
 
-        if (!product){
+        if (!product){ // if the name is not in inventory
             console.log(`Product ${item.product} cannot be found`);
             return false;
         }
@@ -30,9 +30,9 @@ function placeOrder(customerName, itemsOrdered){
         }
         return true;
     }, true);
-if (!itemsInStock) return;
+if (!itemsInStock) return; 
 itemsOrdered.forEach(item => {
-    let product = inventory.find(order => order.name === item.product);
+    let product = inventory.find(product => product.name === item.product);
     product.quantity -= item.quantity;
 });
 
@@ -43,6 +43,18 @@ let customerOrder = {
 };
 orders.push(customerOrder);
 console.log('Order placed', customerOrder);
+}
+
+// task 4 create a function to calculate total for an order
+
+function completeOrder (order) {
+    let total = 0; // so that we can add to the amount in the cart
+    order.items.forEach(item => {
+        let product = inventory.find(product => product.name === item.product);
+        if (product) {
+            total += product.price * item.quantity; // calculate total order by summing prices of all ordered items
+        }    });
+        return total;  
 }
 
 
