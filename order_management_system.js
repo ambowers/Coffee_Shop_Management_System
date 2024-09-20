@@ -33,7 +33,7 @@ function placeOrder(customerName, itemsOrdered){
 if (!itemsInStock) return; 
 itemsOrdered.forEach(item => {
     let product = inventory.find(product => product.name === item.product);
-    product.quantity -= item.quantity;
+    product.quantity -= item.quantity; // items are available, subtracting ordered quantity from products stock
 });
 
 let customerOrder = {
@@ -62,12 +62,29 @@ function completeOrder (order) {
 function completeOrder(customerName) {
     let order = orders.find(order => order.customer === customerName);
     if (order){
-        order.status = 'Completed';
+        order.status = 'Completed'; // found order w matching customer name in orders array, status changed to completed
         console.log(`Order complete for customer ${customerName}`);
-    } else {
+    } else { // if the order cannot b found, log an error mssg
         console.log(`Order for ${customerName} cannot be found`);
     }
 }
+
+// task 6 Create a function to check pending orders
+function checkPendingOrders (){
+    let isPending = false;
+    orders.forEach(order => { // iterate over the orders array
+        if (order.status === 'Pending'){
+            isPending = true;
+            console.log(`Order of ${order.customer} is still pending`);
+            order.items.forEach(item => {
+                console.log(`${item.product}, quantity: ${item.quantity}`);
+            });
+        }});
+}
+
+
+
+
 
 
 
